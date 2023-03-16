@@ -28,7 +28,6 @@ export default function RootLayout({
         className=' bg-slate-50 dark:bg-slate-900'
         >
         <Providers>
-
           {/* @ts-expect-error Server Component */}
           <Nav />
           <main>{children}</main>

@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-import withPWA from 'next-pwa';
-import runtimeCaching from 'next-pwa/cache.js';
 
 const nextConfig = {
   experimental: {
@@ -8,13 +6,13 @@ const nextConfig = {
   },
 }
 
+// const isProduction = process.env.NODE_ENV === 'production';
 
-const isProduction = process.env.NODE_ENV === 'production';
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  // disable: !isProduction,
+});
 
 module.exports = withPWA({
-  dest: 'public',
-  disable: !isProduction,
-  runtimeCaching,
-})({
   ...nextConfig
 });
