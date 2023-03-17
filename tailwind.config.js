@@ -8,6 +8,7 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: 'class',
+  // important: '#__next',
   theme: {
     extend: {},
   },

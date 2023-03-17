@@ -4,7 +4,10 @@
 
 export default function Home() {
   return (
-    <main className='p-6 bg-slate-500 text-red-50'>
-    </main>
+    <div className='relative h-screen flex items-end justify-center overflow-x-hidden'>
+      <div className='container'>
+        <div>Hello World</div>
+      </div>
+    </div>
   )
 }

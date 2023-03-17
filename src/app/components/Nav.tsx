@@ -1,19 +1,33 @@
+'use client'
+import { useState } from 'react';
 import { getServerSession } from 'next-auth';
 import Link from 'next/link';
-import ThemeToggle from './ThemeToggle';
+import AppBar from '@mui/material/AppBar';
+import { MenuIcon } from 'lucide-react';
 
-const Nav = async () => {
-  const session = await getServerSession();
+import ThemeToggle from './ThemeToggle';
+import Menu from './Menu';
+
+const Nav = () => {
+  const [open, setOpen] = useState<boolean>(false);
   return (
-    <div className='fixed backdrop-blur-sm bg-white/75'>
-        <div className='container max-w-7xl mx-auto w-full flex justify-between items-center'>
-          <Link href='/' className=''></Link>
-            Transit app
-        </div>
-        <div className=''>
+    <>
+      <AppBar
+        className={`fixed backdrop-blur-sm bg-white/75 dark:bg-slate-900/100 h-10 z-10 px-2 w-full border-b border-slate-500 text-slate-900 dark:text-slate-50 ${ open ? 'ml-0' : ''}`}
+        position="static"
+      >
+      {/* <div className='fixed backdrop-blur-sm bg-white/75 dark:bg-slate-900/100 h-10 z-10 px-2 w-full border-b border-slate-900'> */}
+          <div className='container max-w-7xl mx-auto w-full h-full flex justify-between items-center'>
+            <MenuIcon onClick={() => {setOpen(true)}}/>
+            <Link href='/' className=''>
+              Transit app
+            </Link>
           <ThemeToggle />
-        </div>
-    </div>
+          </div>
+      {/* </div> */}
+      </AppBar>
+      <Menu open={open} setOpen={setOpen} />
+    </>
   )
 }
 

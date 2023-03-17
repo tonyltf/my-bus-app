@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import Providers from './components/Providers';
 import './globals.css'
 import Nav from './components/Nav';
+import Menu from './components/Menu';
 
 export const metadata = {
   title: 'Create Next App',
@@ -19,17 +20,17 @@ export default function RootLayout({
   return (
     <html
       lang='en'
-      className={`bg-white text-slate-900 antialiased ${inter.className}`}
+      className={`bg-white dark:bg-slate-900 antialiased ${inter.className}`}
     >
       <head>
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body
-        className=' bg-slate-50 dark:bg-slate-900'
+        className='text-slate-900 dark:text-slate-50 dark:bg-slate-900'
         >
         <Providers>
-          {/* @ts-expect-error Server Component */}
           <Nav />
+          {/* <Menu /> */}
           <main>{children}</main>
         </Providers>
       </body>
