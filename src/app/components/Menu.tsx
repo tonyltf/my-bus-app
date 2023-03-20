@@ -24,7 +24,7 @@ const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateActi
       onOpen={(event) => { setOpen(true); }}
       onClose={(event) => { setOpen(false); }}
     >
-      <div className='h-10 container flex items-center px-4'>
+      <div className='h-12 container flex items-center px-4'>
         <ArrowLeft onClick={() => setOpen(false)} />
       </div>
       <Divider />

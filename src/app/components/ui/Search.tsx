@@ -1,13 +1,14 @@
 import InputBase from '@mui/material/InputBase';
-// import { SearchIcon } from 'lucide-react';
-import SearchIcon from '@mui/icons-material/Search';
+import { SearchIcon } from 'lucide-react';
 
 const Search = () => {
   return (
-    <div className=' bg-slate-700 text-slate-900 dark:text-slate-50 w-auto space-x-2' >
-      <SearchIcon/>
+    <div className='w-full mx-2 relative rounded-full bg-white/50 flex justify-center align-middle items-center'> <div className='pointer-events-none px-2'>
+        <SearchIcon />
+      </div>
       <InputBase
-        placeholder='Search...'
+        className='w-full dark:text-slate-50'
+        placeholder="Search…"
         inputProps={{ 'aria-label': 'search' }}
       />
     </div>
