@@ -3,7 +3,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { IconButton } from "@mui/material";
 import { MoreHorizontalIcon } from "lucide-react"
-import { nanoid } from 'nanoid';
 
 interface MenuProps {
   items: {
@@ -22,7 +21,6 @@ const MoreMenu: FC<MenuProps> = ({ items = [] }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  // const id = nanoid();
   return (
     <>
       <IconButton

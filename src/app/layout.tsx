@@ -1,3 +1,10 @@
+import 'server-only'
+
+import SupabaseListener from './components/supabase-listener';
+import SupabaseProvider from './components/supabase-provider';
+import { createClient } from '../utils/supabase-server';
+
+
 import { Inter } from 'next/font/google';
 
 import Providers from './components/Providers';
@@ -12,11 +19,20 @@ export const metadata = {
 
 const inter = Inter({ subsets: ['latin' ]});
 
-export default function RootLayout({
+// do not cache this layout
+export const revalidate = 0
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+  const supabase = createClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
   return (
     <html
       lang='en'
@@ -28,10 +44,14 @@ export default function RootLayout({
       <body
         className='text-slate-900 dark:text-slate-50 dark:bg-slate-900'
         >
+        
         <Providers>
-          <Nav />
-          {/* <Menu /> */}
-          <main>{children}</main>
+          <SupabaseProvider>
+            <SupabaseListener serverAccessToken={session?.access_token} />
+            <Nav />
+            {/* <Menu /> */}
+            <main>{children}</main>
+          </SupabaseProvider>
         </Providers>
       </body>
     </html>

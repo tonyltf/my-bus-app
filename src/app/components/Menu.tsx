@@ -8,7 +8,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { ArrowLeft, Bus, Star } from 'lucide-react';
+import { ArrowLeft, Bus, Star, Settings } from 'lucide-react';
+import Button from '@mui/material/Button';
 
 const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateAction<boolean>> }) => {
   return (
@@ -24,8 +25,7 @@ const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateActi
       onOpen={(event) => { setOpen(true); }}
       onClose={(event) => { setOpen(false); }}
     >
-      <div className='h-12 container flex items-center px-4'>
-        <ArrowLeft onClick={() => setOpen(false)} />
+      <div className='h-12 container flex items-center px-4'>        <ArrowLeft onClick={() => setOpen(false)} />
       </div>
       <Divider />
       <List>
@@ -43,6 +43,14 @@ const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateActi
               <Star className='dark:text-slate-50'/>
             </ListItemIcon>
             <ListItemText primary='Favourite' />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <Settings className='dark:text-slate-50'/>
+            </ListItemIcon>
+            <ListItemText primary='Setting' />
           </ListItemButton>
         </ListItem>
       </List>
