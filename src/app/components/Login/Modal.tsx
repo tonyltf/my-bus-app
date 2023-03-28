@@ -1,5 +1,10 @@
+import { Dispatch, SetStateAction } from "react";
+import Box from "@mui/material/Box";
+import Fade from "@mui/material/Fade";
+import Modal from "@mui/material/Modal";
+import Login from "../Login";
 
-const LoginModal = ({ openLoginModal, setOpenLoginModal }: { openLoginModaL: boolean; setOpenLoginModal: Dispatch<SetStateAction<boolean>>}) => {
+const LoginModal = ({ openLoginModal, setOpenLoginModal }: { openLoginModal: boolean; setOpenLoginModal: Dispatch<SetStateAction<boolean>>}) => {
   return (
     <Modal
       open={openLoginModal}
@@ -16,4 +21,4 @@ const LoginModal = ({ openLoginModal, setOpenLoginModal }: { openLoginModaL: boo
   )
 }
 
-export const LoginModal;
+export default LoginModal;
