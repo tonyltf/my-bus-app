@@ -15,7 +15,20 @@ import LoginModal from './Login/Modal';
 
 const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateAction<boolean>> }) => {
   const [openLoginModal, setOpenLoginModal] = useState<boolean>(false);
-  // handle menu button onclick
+  // handle menu item onclick
+  const handleMenuItemClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const { textContent } = event.target as HTMLDivElement;
+    switch (textContent) {
+      case 'Login':
+        setOpenLoginModal(true);
+        break;
+      default:
+        break;
+    }
+
+    setOpen(false);
+  }
+
 
 
   return (
@@ -54,7 +67,7 @@ const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateActi
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={(e) => { handleMenuItemClick(e) }}>
               <ListItemIcon>
                 <Settings className='dark:text-slate-50'/>
               </ListItemIcon>
@@ -62,7 +75,7 @@ const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateActi
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => { setOpenLoginModal(true); }}>
+            <ListItemButton onClick={(e) => { handleMenuItemClick(e) }} >
               <ListItemIcon>
                 <LogInIcon className='dark:text-slate-50'/>
               </ListItemIcon>
