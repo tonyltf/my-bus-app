@@ -1,6 +1,6 @@
 'use client'
 
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, ReactElement, SetStateAction, useState } from 'react';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
@@ -8,7 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { ArrowLeft, Bus, Star, Settings as SettingsIcon, LogInIcon } from 'lucide-react';
+import { ArrowLeft, Bus, Settings as SettingsIcon, LogInIcon } from 'lucide-react';
 import Settings from './Settings';
 import Login from './Login';
 import ModalWrapper from './Modal';
@@ -18,23 +18,23 @@ const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateActi
   const [openSettingModal, setOpenSettingModal] = useState<boolean>(false);
 
   // extract drawer items into an array
-  const drawerItems = [
+  const drawerItems: { icon: ReactElement; text: string; handler: (event?: MouseEvent<T>) => void; }[] = [
     {
       icon: <Bus className='dark:text-slate-50' />,
       text: 'Transit',
-      handler: (e) => {},
+      handler: () => {},
     },
     {
       icon: <SettingsIcon className='dark:text-slate-50'/>,
       text: 'Settings',
-      handler: (e) => {
+      handler: () => {
         setOpenSettingModal(true);
       },
     },
     {
       icon: <LogInIcon className='dark:text-slate-50'/>,
       text: 'Login',
-      handler: (e) => {
+      handler: () => {
         setOpenLoginModal(true);
       },
     }
@@ -52,8 +52,8 @@ const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateActi
           }
         }}
         open={open}
-        onOpen={(event) => { setOpen(true); }}
-        onClose={(event) => { setOpen(false); }}
+        onOpen={() => { setOpen(true); }}
+        onClose={() => { setOpen(false); }}
       >
         <div className='h-12 container flex items-center px-4'>
           <ArrowLeft onClick={() => setOpen(false)} />
