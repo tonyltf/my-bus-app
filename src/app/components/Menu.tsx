@@ -12,9 +12,11 @@ import { ArrowLeft, Bus, Star, Settings, LogInIcon } from 'lucide-react';
 import { Box, Fade, Modal } from '@mui/material';
 import Login from './Login';
 import LoginModal from './Login/Modal';
+import ModalWrapper from './Modal';
 
 const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateAction<boolean>> }) => {
   const [openLoginModal, setOpenLoginModal] = useState<boolean>(false);
+  const [openSettingModal, setOpenSettingModal] = useState<boolean>(false);
   // handle menu item onclick
   const handleMenuItemClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { textContent } = event.target as HTMLDivElement;
@@ -22,6 +24,8 @@ const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateActi
       case 'Login':
         setOpenLoginModal(true);
         break;
+      case 'Setting':
+        setOpenSettingModal(true); 
       default:
         break;
     }
@@ -84,7 +88,10 @@ const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateActi
           </ListItem>
         </List>
       </SwipeableDrawer>
-      <LoginModal openLoginModal={openLoginModal} setOpenLoginModal={setOpenLoginModal} />
+      <ModalWrapper open={openLoginModal} setOpen={setOpenLoginModal}>
+        <Login />
+    </ModalWrapper>
+      <ModalWrapper open={openSettingModal} setOpen={setOpenSettingModal}><Settings /></ModalWrapper>
     </>
   )
 }
