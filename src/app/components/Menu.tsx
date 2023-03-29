@@ -1,6 +1,6 @@
 'use client'
 
-import { Dispatch, ReactElement, SetStateAction, useState } from 'react';
+import { Dispatch, MouseEventHandler, ReactElement, SetStateAction, useState } from 'react';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
@@ -18,7 +18,7 @@ const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateActi
   const [openSettingModal, setOpenSettingModal] = useState<boolean>(false);
 
   // extract drawer items into an array
-  const drawerItems: { icon: ReactElement; text: string; handler: (event?: MouseEvent<T>) => void; }[] = [
+const drawerItems: { icon: ReactElement; text: string; handler: MouseEventHandler<HTMLDivElement> }[] = [
     {
       icon: <Bus className='dark:text-slate-50' />,
       text: 'Transit',
