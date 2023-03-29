@@ -8,33 +8,39 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { ArrowLeft, Bus, Star, Settings, LogInIcon } from 'lucide-react';
-import { Box, Fade, Modal } from '@mui/material';
+import { ArrowLeft, Bus, Star, Settings as SettingsIcon, LogInIcon } from 'lucide-react';
+import Settings from './Settings';
 import Login from './Login';
-import LoginModal from './Login/Modal';
 import ModalWrapper from './Modal';
 
 const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateAction<boolean>> }) => {
   const [openLoginModal, setOpenLoginModal] = useState<boolean>(false);
   const [openSettingModal, setOpenSettingModal] = useState<boolean>(false);
-  // handle menu item onclick
-  const handleMenuItemClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const { textContent } = event.target as HTMLDivElement;
-    switch (textContent) {
-      case 'Login':
+
+  // extract drawer items into an array
+  const drawerItems = [
+    {
+      icon: <Bus className='dark:text-slate-50' />,
+      text: 'Transit',
+      handler: (e) => {},
+    },
+    {
+      icon: <SettingsIcon className='dark:text-slate-50'/>,
+      text: 'Settings',
+      handler: (e) => {
+        setOpenSettingModal(true);
+      },
+    },
+    {
+      icon: <LogInIcon className='dark:text-slate-50'/>,
+      text: 'Login',
+      handler: (e) => {
         setOpenLoginModal(true);
-        break;
-      case 'Setting':
-        setOpenSettingModal(true); 
-      default:
-        break;
+      },
     }
+  ];
 
-    setOpen(false);
-  }
-
-
-
+  // render List items from drawerItems
   return (
     <>
       <SwipeableDrawer
@@ -54,46 +60,30 @@ const Menu = ({ open, setOpen }: { open: boolean, setOpen: Dispatch<SetStateActi
         </div>
         <Divider />
         <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Bus className='dark:text-slate-50'/>
-              </ListItemIcon>
-              <ListItemText primary='Transit' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Star className='dark:text-slate-50'/>
-              </ListItemIcon>
-              <ListItemText primary='Favourite' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton onClick={(e) => { handleMenuItemClick(e) }}>
-              <ListItemIcon>
-                <Settings className='dark:text-slate-50'/>
-              </ListItemIcon>
-              <ListItemText primary='Setting' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton onClick={(e) => { handleMenuItemClick(e) }} >
-              <ListItemIcon>
-                <LogInIcon className='dark:text-slate-50'/>
-              </ListItemIcon>
-              <ListItemText primary='Login' />
-            </ListItemButton>
-          </ListItem>
+          {drawerItems.map(({ text, icon, handler }) => (
+            <ListItem disablePadding key={text}>
+              <ListItemButton onClick={(e) => { 
+                // call the handler and close the menu
+                handler && handler(e);
+                setOpen(false);
+              }}>
+                <ListItemIcon>
+                  {icon}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
       </SwipeableDrawer>
       <ModalWrapper open={openLoginModal} setOpen={setOpenLoginModal}>
         <Login />
-    </ModalWrapper>
-      <ModalWrapper open={openSettingModal} setOpen={setOpenSettingModal}><Settings /></ModalWrapper>
+      </ModalWrapper>
+      <ModalWrapper open={openSettingModal} setOpen={setOpenSettingModal}>
+        <Settings />
+      </ModalWrapper>
     </>
-  )
+  );
 }
 
 export default Menu;
