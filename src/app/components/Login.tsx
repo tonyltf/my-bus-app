@@ -1,7 +1,7 @@
 'use client'
 
 import Button from '@mui/material/Button'
-import { useSupabase } from './supabase-provider'
+import { useSupabase } from '../supabase-provider'
 
 // Supabase auth needs to be triggered client-side
 export default function Login() {
@@ -23,6 +23,12 @@ export default function Login() {
   const handleGoogleLogin = async () => {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
+      options: {
+        queryParams: {
+          access_type: 'offline',
+          prompt: 'consent',
+        },
+      },
     })
   }
 
