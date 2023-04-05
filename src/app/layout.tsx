@@ -1,7 +1,7 @@
 import 'server-only'
 
 import SupabaseListener from './components/supabase-listener';
-import SupabaseProvider from './components/supabase-provider';
+import SupabaseProvider from './supabase-provider';
 import { createClient } from '../utils/supabase-server';
 
 
@@ -49,7 +49,6 @@ export default async function RootLayout({
           <SupabaseProvider>
             <SupabaseListener serverAccessToken={session?.access_token} />
             <Nav />
-            {/* <Menu /> */}
             <main>{children}</main>
           </SupabaseProvider>
         </Providers>
