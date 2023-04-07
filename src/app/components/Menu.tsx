@@ -8,7 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { ArrowLeft, Bus, Settings as SettingsIcon, LogInIcon } from 'lucide-react';
+import { ArrowLeft, Bus, Settings as SettingsIcon, LucideLogIn } from 'lucide-react';
 import Settings from './Settings';
 import Login from './Login';
 import ModalWrapper from './Modal';
@@ -32,7 +32,7 @@ const drawerItems: { icon: ReactElement; text: string; handler: MouseEventHandle
       },
     },
     {
-      icon: <LogInIcon className='dark:text-slate-50'/>,
+      icon: <LucideLogIn className='dark:text-slate-50'/>,
       text: 'Login',
       handler: () => {
         setOpenLoginModal(true);
